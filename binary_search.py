@@ -42,11 +42,25 @@ def binary_search(seq, number):
     return
 
 
+def recursive_binary_search(seznam, hodnota, left, right):
+    middle = (right + left) // 2
+
+    if hodnota < seznam[middle]:
+        return recursive_binary_search(seznam, hodnota, left, middle - 1)
+    elif hodnota > seznam[middle]:
+        return recursive_binary_search(seznam, hodnota, right, middle + 1)
+    else:
+        return middle
+
+
 def main(file_name, number):
     sequence = read_data(file_name=file_name, key='ordered_numbers')
 
     # iterative binary search
     binary_search(sequence, number=number)
+
+    num_idx = recursive_binary_search(sequence, number, 0, len(sequence) - 1)
+    print(num_idx)
 
 
 if __name__ == '__main__':
